@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,23 @@
     <link rel="stylesheet" href="style.css">
     <title>Editor</title>
 </head>
+
 <body>
-    
+    <main>
+        <div>
+            <label>tile: </label><select id="tileSelect">
+                <option value="block">block</option>
+                <option value="platform">platform</option>
+                <option value="elevator">elevator</option>
+                <option value="spikesFloor">spikes_floor</option>
+                <option value="spikesRoof">spikes_roof</option>
+                <option value="hookpoint">hookpoint</option>
+            </select>
+        </div>
+    </main>
     <script src="js/files.js"></script>
     <script src="js/testLevel.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -1,9 +1,11 @@
+const tileSelect = document.getElementById("tileSelect");
+
 
 update = () => {
     requestAnimationFrame(update);
 
-    if (Renderer.canvas.width !== window.innerWidth) Renderer.canvas.width = window.innerWidth;
-    if (Renderer.canvas.height !== window.innerHeight) Renderer.canvas.height = window.innerHeight;
+   // if (Renderer.canvas.width !== window.innerWidth) Renderer.canvas.width = window.innerWidth;
+  //  if (Renderer.canvas.height !== window.innerHeight) Renderer.canvas.height = window.innerHeight;
 
     Renderer.clear();
 
@@ -22,7 +24,7 @@ update = () => {
         }
     }
 
-    Renderer.ctx.drawImage(sprites.tiles.block, (Math.floor((Mouse.x / 16))) * 16, (Math.floor((Mouse.y / 16))) * 16);
+    Renderer.ctx.drawImage(sprites.tiles[tileSelect.value], (Math.floor((Mouse.x / 16))) * 16, (Math.floor((Mouse.y / 16))) * 16);
 }
 
 window.onload = () => update();
@@ -56,7 +58,7 @@ let Renderer = new class {
     }
 }
 
-let Mouse = new class {
+Mouse = new class {
     constructor() {
         Renderer.canvas.addEventListener('mousemove', (e) => {
             this.x = e.offsetX;
@@ -67,7 +69,7 @@ let Mouse = new class {
     }
 }
 
-let Keys = new class {
+Keys = new class {
     constructor() {
         document.addEventListener('keydown', (e) => {
             switch (e.code) {
