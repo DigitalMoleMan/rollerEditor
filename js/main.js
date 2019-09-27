@@ -2,30 +2,27 @@
 update = () => {
     requestAnimationFrame(update);
 
-
-    if(Mouse.x < 64) Renderer.scrollX+= 2;
-            if(Mouse.x > Renderer.canvas.width - 64) Renderer.scrollX-= 2;
-            if(Mouse.y < 64) Renderer.scrollY+= 2;
-            if(Mouse.y > Renderer.canvas.height - 64) Renderer.scrollY-= 2;
+    if (Renderer.canvas.width !== window.innerWidth) Renderer.canvas.width = window.innerWidth;
+    if (Renderer.canvas.height !== window.innerHeight) Renderer.canvas.height = window.innerHeight;
 
     Renderer.clear();
 
     for (var i = 0; i < level.length; i++) {
+
         var lvl = level[i];
         for (var j = 0; j < lvl.layout.length; j++) {
             var row = lvl.layout[j];
             for (var k = 0; k < row.length; k++) {
                 var tile = row[k];
                 switch (tile) {
-                    case 'X': {
-                        Renderer.ctx.drawImage(sprites.tiles.block, (k * 16) + (i * 1200) + Renderer.scrollX, (j * 16)+ Renderer.scrollY);
-                    }
+                    case 'X': Renderer.ctx.drawImage(sprites.tiles.block, (k * 16) + (i * 1200) - Renderer.scrollX, (j * 16) - Renderer.scrollY); break;
+                    //case '-': Renderer.ctx.drawImage(sprites.tiles.platform, (k * 16) + (i * 1200) - Renderer.scrollX, (j * 16) - Renderer.scrollY); break;
                 }
             }
         }
     }
 
-    Renderer.fillRect(Mouse.x, Mouse.y, 1, 1, "#fff");
+    Renderer.ctx.drawImage(sprites.tiles.block, (Math.floor((Mouse.x / 16))) * 16, (Math.floor((Mouse.y / 16))) * 16);
 }
 
 window.onload = () => update();
@@ -41,7 +38,7 @@ let Renderer = new class {
         this.canvas.height = options.height;
 
         document.body.appendChild(this.canvas);
-        this.ctx.scale(1, 1);
+
 
         this.scrollX = 0;
         this.scrollY = 0;
@@ -53,6 +50,7 @@ let Renderer = new class {
     }
 
     fillRect(x, y, w, h, c) {
+
         this.ctx.fillStyle = c;
         this.ctx.fillRect(x, y, w, h);
     }
@@ -64,15 +62,20 @@ let Mouse = new class {
             this.x = e.offsetX;
             this.y = e.offsetY;
 
-            
+
         })
     }
 }
 
 let Keys = new class {
-    constructor(){
-        Renderer.canvas.addEventListener('keydown', (e) => {
-
+    constructor() {
+        document.addEventListener('keydown', (e) => {
+            switch (e.code) {
+                case 'KeyW': Renderer.scrollY -= 16; break;
+                case 'KeyA': Renderer.scrollX -= 16; break;
+                case 'KeyS': Renderer.scrollY += 16; break;
+                case 'KeyD': Renderer.scrollX += 16; break;
+            }
         })
     }
 }
