@@ -1,8 +1,22 @@
 body{
     margin: 0;
       overflow: hidden;
-    background-color: #222;
+    background-color: #000;
     color: #fff;
+}
+
+main{
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 60rem;
+    height: 60rem;
+
+    background-color: #111;
+}
+
+.topbar{
+    background-color: #222;
 }
 
 canvas{

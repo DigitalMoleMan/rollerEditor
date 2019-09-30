@@ -10,18 +10,32 @@
 </head>
 
 <body>
-    <main>
-        <div>
-            <label>tile: </label><select id="tileSelect">
-                <option value="block">block</option>
-                <option value="platform">platform</option>
-                <option value="elevator">elevator</option>
-                <option value="spikesFloor">spikes_floor</option>
-                <option value="spikesRoof">spikes_roof</option>
-                <option value="hookpoint">hookpoint</option>
-            </select>
+    <main id="main">
+        <div class="topbar">
+            <div class="fileButtons">
+                <button id="newLevelButton">new</button>
+                <button id="openLevelButton">open</button>
+                <button id="saveLevelButton" onclick="Editor.saveLevel()">save</button>
+            </div>
+            <div>
+                <label>tool: </label><select id="toolSelect">
+                        <option value="TilePlacer">TilePlacer</option>
+                        <option value="TileRemover">TileRemover</option>
+                </select>
+            </div>
+            <div>
+                <label>tile: </label><select id="tileSelect">
+                    <option value="block">block</option>
+                    <option value="platform">platform</option>
+                    <option value="elevator">elevator</option>
+                    <option value="spikesFloor">spikes_floor</option>
+                    <option value="spikesRoof">spikes_roof</option>
+                    <option value="hookpoint">hookpoint</option>
+                </select>
+            </div>
         </div>
     </main>
+    <script src="js/tools.js"></script>
     <script src="js/files.js"></script>
     <script src="js/testLevel.js"></script>
     <script src="js/main.js"></script>

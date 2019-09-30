@@ -1,5 +1,19 @@
 
 block = (n) => n * 32;
+
+class Level{
+    constructor(o = {
+        name: new String,
+        tiles: new Array,
+        doors: new Array
+    }) {
+        this.name = o.name;
+        this.tiles = o.tiles;
+        this.doors = o.doors;
+    }
+}
+
+
 const level = [
     {
         name: "The Well",
@@ -190,7 +204,7 @@ const level = [
         ],
         npcs: [
             //new TestSign(5, 90, () => dialogue.debugMsgs[0]),
-           // new Bogus(block(30), block(79), () => dialogue.playDialogue(bogusDialogues[0])) //block(20), block(20)),
+            // new Bogus(block(30), block(79), () => dialogue.playDialogue(bogusDialogues[0])) //block(20), block(20)),
             // new LaserTurret(block(20), block(31)),
             //new Roamer(30, 31)
         ]
@@ -458,4 +472,3 @@ const level = [
         advancedLayer: []
     }];
 
-    

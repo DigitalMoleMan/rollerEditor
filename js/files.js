@@ -9,7 +9,7 @@ const sprites = {
     npc: {},
     tiles: {
         block: getImg("img/tiles/block/block_0.png"),
-        elevator: getImg("img/tiles/elevator_0.png"),
+        elevator: getImg("img/tiles/elevator.png"),
         hookpoint: getImg("img/tiles/hookpoint.png"),
         lamp: getImg("img/tiles/lamp.png"),
         platform: getImg("img/tiles/platform.png"),
