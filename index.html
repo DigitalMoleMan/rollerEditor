@@ -13,9 +13,10 @@
     <main id="main">
         <div class="topbar">
             <div class="fileButtons">
-                <button id="newLevelButton">new</button>
-                <button id="openLevelButton">open</button>
+                <button id="newLevelButton" onclick="Editor.newLevel()">new</button>
+                <button id="openLevelButton" onclick="Editor.openLevel()">open</button>
                 <button id="saveLevelButton" onclick="Editor.saveLevel()">save</button>
+                <input id="fileNameInput" type="text" placeholder="new_level">
             </div>
             <div>
                 <label>tool: </label><select id="toolSelect">
@@ -23,7 +24,7 @@
                         <option value="TileRemover">TileRemover</option>
                 </select>
             </div>
-            <div>
+            <div class="toolOptions">
                 <label>tile: </label><select id="tileSelect">
                     <option value="block">block</option>
                     <option value="platform">platform</option>

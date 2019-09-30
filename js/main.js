@@ -58,26 +58,37 @@ Keys = new class {
 Editor = new class {
     constructor() {
         this.activeTool = () => tools[toolSelect.value];
-        this.openLevel = new Level({
+        this.activeLevel = new Level({
             name: level[0].name,
-            tiles: new Array,//level[0].layout,
+            tiles: new Array,
             doors: new Array
         });
 
         this.cursorX = () => Mouse.x + (Renderer.scrollX / 16);
         this.cursorY = () => Mouse.y + (Renderer.scrollY / 16);
 
-        document.addEventListener("mousedown", () => this.activeTool().mouseDown());
-        document.addEventListener("mouseup", () => this.activeTool().mouseUp());
-        document.addEventListener("mousemove", () => this.activeTool().mouseMove());
+        Renderer.canvas.addEventListener("mousedown", () => this.activeTool().mouseDown());
+        Renderer.canvas.addEventListener("mouseup", () => this.activeTool().mouseUp());
+        Renderer.canvas.addEventListener("mousemove", () => this.activeTool().mouseMove());
+    }
+
+    newLevel(){
+        this.activeLevel = new Level();
+    }
+
+    openLevel(){
+
     }
 
     saveLevel(){
-        var levelString = JSON.stringify(this.openLevel);
+        var levelString = JSON.stringify(this.activeLevel);
+        console.log(levelString);
+        /*
         var exportData = 'data:text/json;charset=utf-8,';
         exportData += escape(levelString);
         var encodedUri = encodeURI(exportData);
         window.open(encodedUri);
+        */
     }
 }
 
@@ -87,7 +98,7 @@ update = () => {
     Renderer.clear();
 
 
-    var lvl = () => Editor.openLevel;
+    var lvl = () => Editor.activeLevel;
 
     lvl().tiles.forEach(tile => {
         Renderer.ctx.drawImage(sprites.tiles[tile.type], (tile.x * 16) - Renderer.scrollX, (tile.y * 16) - Renderer.scrollY);
