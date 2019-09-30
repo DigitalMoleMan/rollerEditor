@@ -105,7 +105,9 @@ update = () => {
     });
 
     //case '-': Renderer.ctx.drawImage(sprites.tiles.platform, (k * 16) + (i * 1200) - Renderer.scrollX, (j * 16) - Renderer.scrollY); break;
+    Renderer.ctx.globalAlpha = .5;
     Renderer.ctx.drawImage(sprites.tiles[tileSelect.value], Mouse.x * 16, Mouse.y * 16);
+    Renderer.ctx.globalAlpha = 1;
     Renderer.ctx.fillStyle = "#fff";
     Renderer.ctx.fillText("X:" + Editor.cursorX() + " Y:" + Editor.cursorY(), 10, 10);
 }

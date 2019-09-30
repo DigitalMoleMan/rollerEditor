@@ -1,6 +1,7 @@
 body{
     margin: 0;
       overflow: hidden;
+      font-family: monospace;
     background-color: #000;
     color: #fff;
 }
@@ -11,12 +12,7 @@ main{
     margin: 0 auto;
     width: 60rem;
     height: 60rem;
-
     background-color: #111;
-}
-
-.topbar{
-    background-color: #222;
 }
 
 canvas{
