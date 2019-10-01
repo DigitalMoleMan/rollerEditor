@@ -8,8 +8,7 @@ const tools = {
         }
         mouseDown() {
             this.mouseIsDown = true;
-
-            if(Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length == 0) {
+            if (Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length == 0) {
                 this.addTile();
             }
         }
@@ -20,7 +19,7 @@ const tools = {
 
         mouseMove() {
             if (this.mouseIsDown) {
-                if(Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length == 0) {
+                if (Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length == 0) {
                     this.addTile();
                 }
             }
@@ -35,16 +34,27 @@ const tools = {
         }
     },
     TileRemover: new class {
+        constructor() {
+            this.mouseIsDown = false;
+        }
         mouseDown() {
-            this.removeTile();
+            this.mouseIsDown = true;
+            if (Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length !== 0) this.removeTile();
         }
 
         mouseUp() {
+            this.mouseIsDown = false;
+        }
 
+        mouseMove() {
+            if (this.mouseIsDown) {
+                if (Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length !== 0) this.removeTile();
+            }
         }
 
         removeTile() {
-            var tr = Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY()));
+            var tileIndex = Editor.activeLevel.tiles.findIndex((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY()));
+            Editor.activeLevel.tiles.splice(tileIndex, 1);
         }
     }
 }

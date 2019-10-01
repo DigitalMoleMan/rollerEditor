@@ -14,9 +14,8 @@
         <div class="topbar">
             <div class="fileButtons">
                 <button id="newLevelButton" onclick="Editor.newLevel()">new</button>
-                <button id="openLevelButton" onclick="Editor.openLevel()">open</button>
+                <input id="openLevelButton" type="file" accept="text/json" onchange="Editor.openLevel(event)">
                 <button id="saveLevelButton" onclick="Editor.saveLevel()">save</button>
-                <input id="fileNameInput" type="text" placeholder="new_level">
             </div>
             <div>
                 <label>tool: </label><select id="toolSelect">

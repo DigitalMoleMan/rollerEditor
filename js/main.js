@@ -12,6 +12,9 @@ let Renderer = new class {
         this.canvas.width = options.width;
         this.canvas.height = options.height;
 
+        this.zoom = 1;
+        
+
         mainDOM.appendChild(this.canvas);
 
 
@@ -38,6 +41,10 @@ Mouse = new class {
             this.y = Math.floor((e.offsetY / 16));
 
 
+        })
+        document.addEventListener('wheel', (e) => {
+            var dy = (e.deltaY / 500);
+            //Renderer.ctx.scale(dy, dy);
         })
     }
 };
@@ -72,15 +79,21 @@ Editor = new class {
         Renderer.canvas.addEventListener("mousemove", () => this.activeTool().mouseMove());
     }
 
-    newLevel(){
+    newLevel() {
         this.activeLevel = new Level();
     }
 
-    openLevel(){
+    openLevel(e) {
+        var input = e.target;
 
+        var reader = new FileReader();
+        reader.onload = () => {
+            this.activeLevel = new Level(JSON.parse(reader.result));
+        }
+        reader.readAsText(input.files[0]);
     }
 
-    saveLevel(){
+    saveLevel() {
         var levelString = JSON.stringify(this.activeLevel);
         console.log(levelString);
         /*
@@ -89,14 +102,20 @@ Editor = new class {
         var encodedUri = encodeURI(exportData);
         window.open(encodedUri);
         */
+
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(levelString);
+        var dlAnchorElem = document.createElement('a');
+        dlAnchorElem.setAttribute("href", dataStr);
+        dlAnchorElem.setAttribute("download", "level.json");
+        dlAnchorElem.click();
     }
 }
 
 update = () => {
     requestAnimationFrame(update);
-    
-    Renderer.clear();
 
+    Renderer.clear();
+    
 
     var lvl = () => Editor.activeLevel;
 
