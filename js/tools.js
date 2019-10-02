@@ -8,9 +8,7 @@ const tools = {
         }
         mouseDown() {
             this.mouseIsDown = true;
-            if (Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length == 0) {
-                this.addTile();
-            }
+            this.addTile();
         }
 
         mouseUp() {
@@ -19,18 +17,20 @@ const tools = {
 
         mouseMove() {
             if (this.mouseIsDown) {
-                if (Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY())).length == 0) {
-                    this.addTile();
-                }
+                this.addTile();
             }
         }
 
         addTile() {
-            Editor.activeLevel.tiles.push({
-                type: tileSelect.value,
-                x: Editor.cursorX(),
-                y: Editor.cursorY()
-            })
+            var onTile = Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() + scrollX && tile.y == Editor.cursorY() + scrollY));
+            if (onTile.length == 0) {
+
+                Editor.activeLevel.tiles.push({
+                    type: tileSelect.value,
+                    x: Editor.cursorX() + scrollX,
+                    y: Editor.cursorY() + scrollY
+                });
+            }
         }
     },
     TileRemover: new class {
