@@ -2,7 +2,7 @@ body{
     margin: 0;
       overflow: hidden;
       font-family: monospace;
-    background-color: #000;
+    background-color: #222;
     color: #fff;
 }
 
@@ -10,9 +10,8 @@ main{
     position: relative;
     display: block;
     margin: 0 auto;
-    width: 60rem;
-    height: 60rem;
-    background-color: #111;
+    width: fit-content;
+    height: fit-content;
 }
 
 canvas{

@@ -1,10 +1,16 @@
 
+var block = (n) => n * 16;
+
+
 
 const mainDOM = document.getElementById("main");
 const toolSelect = document.getElementById("toolSelect");
 const tileSelect = document.getElementById("tileSelect");
 
 const canvas = document.getElementById('canvas');
+
+canvas.width = block(58);
+canvas.height = block(24);
 const ctx = canvas.getContext('2d');
 
 
@@ -12,7 +18,6 @@ let renderer = new Renderer(canvas, ctx);
 let mouse = new Mouse(canvas);
 let keys = new Keys(canvas);
 
-var block = (n) => n * 16;
 
 var scrollX = 0;
 var scrollY = 0;
@@ -27,13 +32,15 @@ window.onload = () => {
 }
 
 draw = () => {
+    canvas.width = block(Math.floor(window.innerWidth / block(1)));
+    canvas.height = block(Math.floor(window.innerHeight / block(1)) - 4);
     requestAnimationFrame(draw);
     renderer.clear();
 
     var lvl = () => Editor.activeLevel;
 
     lvl().tiles.forEach(tile => {
-       renderer.img(sprites.tiles[tile.type], block(tile.x - scrollX), block(tile.y - scrollY));
+        renderer.img(sprites.tiles[tile.type], block(tile.x - scrollX), block(tile.y - scrollY));
     });
 
     //case '-': renderer.ctx.drawImage(sprites.tiles.platform, (k * 16) + (i * 1200) - scrollX, (j * 16) - scrollY); break;

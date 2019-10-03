@@ -3,6 +3,10 @@ class Mouse{
         element.addEventListener('mousemove', (e) => {
             this.x = e.offsetX;
             this.y = e.offsetY;
+           
+        })
+        element.addEventListener('mousedown', (e) => {
+            console.log(e);
         })
         element.addEventListener('wheel', (e) => {
             console.log(e);

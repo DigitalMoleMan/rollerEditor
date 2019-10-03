@@ -1,0 +1,11 @@
+{
+    "name": "roller-editor",
+    "version": "0.0.1",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {
+        "electron": "^6.0.11"
+    }
+}
