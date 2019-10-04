@@ -11,15 +11,34 @@ class Block extends Tile{
         super(x, y, sprites.tiles.block);
     }
 }
+
+
+class Tool{
+    constructor(eventActions = {}){
+        this.eventActions = eventActions
+    }
+
+    readEvent(event){
+        this.eventActions[event]();
+    }
+}
 const tools = {
-    TilePlacer: new class {
+    TilePlacer: new class TilePlacer extends Tool{
         constructor() {
+            super({
+                mouseDown: () => this.setMouseDown(e)
+            });
             this.mouseIsDown = false;
             this.mouseButton = undefined;
             this.toolbar = [
 
             ]
         }
+
+        setMouseDown(){
+            console.log(e);
+        }
+
         mouseDown(e) {
             this.mouseIsDown = true;
             this.mouseButton = e.button;
