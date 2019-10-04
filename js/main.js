@@ -1,13 +1,13 @@
 
 var block = (n) => n * 16;
 
-
-
 const mainDOM = document.getElementById("main");
 const toolSelect = document.getElementById("toolSelect");
 const tileSelect = document.getElementById("tileSelect");
 
 const canvas = document.getElementById('canvas');
+
+canvas.addEventListener('contextmenu', event => event.preventDefault());
 
 canvas.width = block(58);
 canvas.height = block(24);
@@ -32,8 +32,8 @@ window.onload = () => {
 }
 
 draw = () => {
-    canvas.width = block(Math.floor(window.innerWidth / block(1)));
-    canvas.height = block(Math.floor(window.innerHeight / block(1)) - 4);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     requestAnimationFrame(draw);
     renderer.clear();
 
