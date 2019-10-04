@@ -18,7 +18,6 @@ class Mouse{
 class Keys {
     constructor(element) {
         document.addEventListener('keydown', (e) => {
-            console.log("y")
             element.dispatchEvent(new Event(e.code));
         })
     }
