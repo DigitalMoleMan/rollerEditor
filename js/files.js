@@ -1,8 +1,19 @@
-getImg = (path) => {
-    var img = new Image;
-    img.src = path;
-    return (img);
+class FileLoader{
+    /**
+     * 
+     * @param {String} path image file path.
+     * @returns {Image}
+     */
+    getImageFromFile(path){
+        var img = new Image;
+        img.src = path;
+        return img;
+    }
 }
+
+FileLoader = new FileLoader();
+
+getImg = (path) => FileLoader.getImageFromFile(path);
 
 const sprites = {
     background: {},
@@ -17,3 +28,5 @@ const sprites = {
         spikesRoof: getImg("img/tiles/spikes_roof.png")
     },
 }
+
+
