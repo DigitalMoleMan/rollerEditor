@@ -5,40 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
     <link rel="stylesheet" href="style.css">
     <title>Editor</title>
 </head>
 
 <body>
     <main id="main">
-        <div class="topbar">
-            <div class="fileButtons">
-                <button id="newLevelButton" onclick="Editor.newLevel()">new</button>
-                <input id="openLevelButton" type="file" accept="text/json" onchange="Editor.openLevel(event)">
-                <button id="saveLevelButton" onclick="Editor.saveLevel()">save</button>
-            </div>
-            <div>
-                <label>tool: </label><select id="toolSelect">
-                        <option value="TilePlacer">TilePlacer</option>
-                        <option value="TileRemover">TileRemover</option>
-                </select>
-            </div>
-            <div class="toolOptions">
-                <label>tile: </label><select id="tileSelect">
-                    <option value="block">block</option>
-                    <option value="platform">platform</option>
-                    <option value="elevator">elevator</option>
-                    <option value="spikesFloor">spikes_floor</option>
-                    <option value="spikesRoof">spikes_roof</option>
-                    <option value="hookpoint">hookpoint</option>
-                </select>
+        <canvas id="canvas"></canvas>
+        <div class="top">
+            <div class="topbar">
+                <div class="fileButtons">
+                    <button id="newLevelButton" onclick="Editor.newLevel()">new</button>
+                    <input id="openLevelButton" type="file" accept="text/json" onchange="Editor.setActiveLevelFromFile(event.target.files[0])">
+                    <button id="saveLevelButton" onclick="Editor.saveLevel()">save</button>
+                </div>
+                <div>
+                    <button id="testLevelButton">test level</button>
+                </div>
             </div>
         </div>
-        <canvas id="canvas"></canvas>
+        <div class="middle">
+            <div class="container left">
+                <div>
+                    <label>tool: </label><select id="toolSelect">
+                        <option value="TilePlacer">TilePlacer</option>
+                    </select>
+                </div>
+                <div class="toolOptions">
+                    <label>tile: </label><select id="tileSelect">
+                        <option value="block">block</option>
+                        <option value="platform">platform</option>
+                        <option value="elevator">elevator</option>
+                        <option value="spikesFloor">spikes_floor</option>
+                        <option value="spikesRoof">spikes_roof</option>
+                        <option value="hookpoint">hookpoint</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+        </div>
+
     </main>
-    
-    
+
+
     <script src="js/tools.js"></script>
     <script src="js/files.js"></script>
     <script src="js/testLevel.js"></script>
@@ -46,10 +57,10 @@
     <script src="js/editor.js"></script>
     <script src="js/input.js"></script>
     <script src="js/main.js"></script>
-    
-    
-   
-    
+
+
+
+
 </body>
 
 </html>

@@ -6,17 +6,55 @@ body{
     color: #fff;
 }
 
-main{
+.container{
     position: relative;
     display: block;
-    margin: 0 auto;
-    width: fit-content;
-    height: fit-content;
+    margin: .5rem;
+    padding: .5rem;
+
+    background-color: #222;
+}
+
+.top{
+    position: relative;
+    display: block;
+}
+
+.middle{
+
+    position: relative;
+    display: block;
+    flex-direction: row
+}
+
+.topbar{
+    display: block;
+}
+
+.left{
+    position: relative;
+    display: block;
+    float: left;
+    order: -1;
+    flex-grow: 1;
+    height: 90vh;
+   
+}
+
+.right{
+    position: relative;
+    display: block;
+    float: right;
+    order: 1;
+    flex-grow: 1;
+    height: 90vh;
 }
 
 canvas{
-    position: relative;
+    position: absolute;
     display: block;
-    margin: 0 auto;
+    order: 0;
+    flex-grow: 1;
     cursor: crosshair;
+    z-index: -1;
 }
