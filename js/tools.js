@@ -72,6 +72,6 @@ addTile = () => {
 }
 
 removeTile = () => {
-    var tileIndex = Editor.activeLevel.tiles.findIndex((tile) => (tile.x == Editor.cursorX() && tile.y == Editor.cursorY()));
+    var tileIndex = Editor.activeLevel.tiles.findIndex((tile) => (tile.x == Editor.cursorX() + scrollX && tile.y == Editor.cursorY() + scrollY));
 if(tileIndex >= 0)   Editor.activeLevel.tiles.splice(tileIndex, 1);
 }
