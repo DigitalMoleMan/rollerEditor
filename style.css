@@ -18,13 +18,13 @@ body{
 .top{
     position: relative;
     display: block;
+    padding: .5rem;
+    background-color: #111;
 }
 
 .middle{
-
     position: relative;
     display: block;
-    flex-direction: row
 }
 
 .topbar{
@@ -35,9 +35,7 @@ body{
     position: relative;
     display: block;
     float: left;
-    order: -1;
-    flex-grow: 1;
-    height: 90vh;
+    height: 90%;
    
 }
 
@@ -45,16 +43,12 @@ body{
     position: relative;
     display: block;
     float: right;
-    order: 1;
-    flex-grow: 1;
     height: 90vh;
 }
 
 canvas{
     position: absolute;
     display: block;
-    order: 0;
-    flex-grow: 1;
     cursor: crosshair;
     z-index: -1;
 }
