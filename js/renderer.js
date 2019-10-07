@@ -1,4 +1,4 @@
-class Renderer{
+class Renderer {
     constructor(canvas, ctx) {
 
 
@@ -36,8 +36,12 @@ class Renderer{
      * @param {Number} x 
      * @param {Number} y 
      */
-    img(image, x, y){
+    img(image, x, y) {
         this.ctx.drawImage(image, x, y);
     }
-}
 
+    text(dText) {
+        this.color = dText.color;
+        this.ctx.fillText(dText.text, dText.x, dText.y);
+    }
+}

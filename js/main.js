@@ -1,17 +1,19 @@
 
-var block = (n) => n * 16;
 
-const mainDOM = document.getElementById("main");
 const toolSelect = document.getElementById("toolSelect");
 const tileSelect = document.getElementById("tileSelect");
 
+// Canvas + Context
 const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
+
+// Prevent context menu on right click.
 canvas.addEventListener('contextmenu', event => event.preventDefault());
 
-canvas.width = block(58);
-canvas.height = block(24);
-const ctx = canvas.getContext('2d');
+
+//block size.
+block = (n) => n * 16;
 
 
 let renderer = new Renderer(canvas, ctx);
@@ -31,24 +33,30 @@ window.onload = () => {
 }
 
 draw = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
     requestAnimationFrame(draw);
+
+    setCanvasSize(window.innerWidth, window.innerHeight)
+
+
     renderer.clear();
 
-    
     lvl = () => Editor.activeLevel;
+    
     lvl().tiles.forEach(tile => {
         var tSprite = sprites.tiles[tile.type];
         var tX = block(tile.x - scrollX);
-        var tY = block(tile.y - scrollY)
+        var tY = block(tile.y - scrollY);
         renderer.img(tSprite, tX, tY);
     });
 
-    //case '-': renderer.ctx.drawImage(sprites.tiles.platform, (k * 16) + (i * 1200) - scrollX, (j * 16) - scrollY); break;
+
     renderer.ctx.globalAlpha = .5;
     renderer.img(sprites.tiles[tileSelect.value], block(Editor.cursorX()), block(Editor.cursorY()));
     renderer.ctx.globalAlpha = 1;
-    renderer.ctx.fillStyle = "#fff";
-    renderer.ctx.fillText("X:" + (Editor.cursorX() + scrollX) + " Y:" + (Editor.cursorY() + scrollY), block(11), block(5));
+
+}
+
+setCanvasSize = (width, height) => {
+    canvas.width = width;
+    canvas.height = height;
 }
