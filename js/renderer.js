@@ -16,12 +16,26 @@ class Renderer{
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    fillRect(x, y, w, h, c) {
+    /**
+     * 
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {Number} width 
+     * @param {Number} height 
+     * @param {String} color 
+     */
+    fillRect(x, y, width, height, color) {
 
-        this.ctx.fillStyle = c;
-        this.ctx.fillRect(x, y, w, h);
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x, y, width, height);
     }
 
+    /**
+     * 
+     * @param {Image} image 
+     * @param {Number} x 
+     * @param {Number} y 
+     */
     img(image, x, y){
         this.ctx.drawImage(image, x, y);
     }
