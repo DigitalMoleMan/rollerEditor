@@ -12,6 +12,10 @@ class Editor {
         canvas.addEventListener("wheel", (e) => this.activeTool().wheel(e));
     }
 
+
+    /**
+     * Resets the editor to a blank slate.
+     */
     newLevel() {
         if (confirm("Are you sure?")) {
             this.activeLevel = new Level();
@@ -30,8 +34,9 @@ class Editor {
     }
 
     /**
+     * Converts a JSON file input to an object.
      * @param {File} inputFile JSON.
-     * @returns {Object} level data as a json object.
+     * @returns {Object} level data as an object.
      */
     getLevelDataFromFile = inputFile => {
         return new Promise(resolve => {
@@ -42,10 +47,10 @@ class Editor {
     };
 
     /**
-     * 
+     * Downloads level in a JSON file.
      * @param {Level} level 
      */
-    saveLevel(level) {
+    saveLevelToJSON(level) {
         var levelString = JSON.stringify(level);
         console.log(levelString);
         var dataStr =
