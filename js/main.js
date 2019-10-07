@@ -23,7 +23,6 @@ var scrollX = 0;
 var scrollY = 0;
 
 window.onload = () => {
-
     canvas.addEventListener('KeyW', () => scrollY--);
     canvas.addEventListener('KeyA', () => scrollX--);
     canvas.addEventListener('KeyS', () => scrollY++);
@@ -37,10 +36,13 @@ draw = () => {
     requestAnimationFrame(draw);
     renderer.clear();
 
-    var lvl = () => Editor.activeLevel;
-
+    
+    lvl = () => Editor.activeLevel;
     lvl().tiles.forEach(tile => {
-        renderer.img(sprites.tiles[tile.type], block(tile.x - scrollX), block(tile.y - scrollY));
+        var tSprite = sprites.tiles[tile.type];
+        var tX = block(tile.x - scrollX);
+        var tY = block(tile.y - scrollY)
+        renderer.img(tSprite, tX, tY);
     });
 
     //case '-': renderer.ctx.drawImage(sprites.tiles.platform, (k * 16) + (i * 1200) - scrollX, (j * 16) - scrollY); break;
@@ -48,5 +50,5 @@ draw = () => {
     renderer.img(sprites.tiles[tileSelect.value], block(Editor.cursorX()), block(Editor.cursorY()));
     renderer.ctx.globalAlpha = 1;
     renderer.ctx.fillStyle = "#fff";
-    renderer.ctx.fillText("X:" + Editor.cursorX() + " Y:" + Editor.cursorY(), 10, 10);
+    renderer.ctx.fillText("X:" + (Editor.cursorX() + scrollX) + " Y:" + (Editor.cursorY() + scrollY), block(11), block(5));
 }
