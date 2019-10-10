@@ -1,17 +1,29 @@
-class Mouse{
+class Mouse {
     constructor(element) {
         element.addEventListener('mousemove', (e) => {
-            this.x = e.offsetX;
-            this.y = e.offsetY;
-        })
-        element.addEventListener('mousedown', (e) => console.log(e));
-        element.addEventListener('wheel', (e) => console.log(e));
+           for (var property in e) this[property] = e[property];
+        });
+        element.addEventListener('mousedown', (e) => {
+          for (var property in e) this[property] = e[property];
+        });
+        element.addEventListener('mousedown', (e) => {
+         for (var property in e) this[property] = e[property];
+        });
+        element.addEventListener('wheel', (e) => {
+            for (var property in e) this[property] = e[property];
+        });
     }
 };
 
-class Keys {
+class Keyboard {
     constructor(element) {
-        document.addEventListener('keydown', (e) => element.dispatchEvent(new Event(e.code)));
+        document.addEventListener('keydown', (e) => document.dispatchEvent(new Event('inputKeyDown', e)));
     }
 };
 
+Input = new class InputHandler {
+    constructor() {
+        this.Mouse = new Mouse(canvas);
+        this.Keyboard = new Keyboard();
+    }
+}

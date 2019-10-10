@@ -9,7 +9,6 @@ class Editor {
         canvas.addEventListener("mousedown", (e) => this.activeTool().mouseDown(e));
         canvas.addEventListener("mouseup", (e) => this.activeTool().mouseUp(e));
         canvas.addEventListener("mousemove", (e) => this.activeTool().mouseMove(e));
-        canvas.addEventListener("wheel", (e) => this.activeTool().wheel(e));
     }
 
 

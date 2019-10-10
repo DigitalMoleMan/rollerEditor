@@ -18,7 +18,6 @@ block = (n) => n * 16;
 
 let renderer = new Renderer(canvas, ctx);
 let mouse = new Mouse(canvas);
-let keys = new Keys(canvas);
 
 
 var scrollX = 0;
@@ -53,6 +52,9 @@ draw = () => {
     renderer.ctx.globalAlpha = .5;
     renderer.img(sprites.tiles[tileSelect.value], block(Editor.cursorX()), block(Editor.cursorY()));
     renderer.ctx.globalAlpha = 1;
+
+    renderer.ctx.fillStyle = "#fff";
+    //console.log(mouse);
 
 }
 
