@@ -17,7 +17,7 @@ class Mouse {
 
 class Keyboard {
     constructor(element) {
-        document.addEventListener('keydown', (e) => document.dispatchEvent(new Event('inputKeyDown', e)));
+        document.addEventListener('keydown', (e) => document.dispatchEvent(new Event(e.code)));
     }
 };
 

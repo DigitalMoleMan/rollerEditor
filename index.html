@@ -17,7 +17,7 @@
                 <div class="fileButtons">
                     <button id="newLevelButton" onclick="Editor.newLevel()">new</button>
                     <input id="openLevelButton" type="file" accept="text/json" onchange="Editor.setActiveLevelFromFile(event.target.files[0])">
-                    <button id="saveLevelButton" onclick="Editor.saveLevel()">save</button>
+                    <button id="saveLevelButton" onclick="Editor.saveLevelToJSON()">save</button>
                 </div>
                 <div>
                     <button id="testLevelButton">test level</button>
@@ -49,6 +49,7 @@
 
     </main>
     
+    <script src="js/tiles.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/files.js"></script>
     <script src="js/testLevel.js"></script>

@@ -5,11 +5,20 @@ class Level{
     constructor(o = {
         name: new String,
         tiles: new Array,
-        doors: new Array
+        doors: new Array,
+
+        
     }) {
         this.name = o.name;
         this.tiles = o.tiles;
         this.doors = o.doors;
+
+        return this;
+    }
+
+
+    draw(){
+        this.tiles.forEach(tile => tile.draw());
     }
 }
 

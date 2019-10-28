@@ -3,12 +3,26 @@ class Editor {
         this.activeTool = () => tools[toolSelect.value];
         this.activeLevel = new Level();
 
-        this.cursorX = () => Math.floor(mouse.x / 16);
-        this.cursorY = () => Math.floor(mouse.y / 16);
+        this.cursorX = () => pxToTiles(mouse.x);
+        this.cursorY = () => pxToTiles(mouse.y);
+
+        this.scrollX = 0;
+        this.scrollY = 0;
+
+        this.cursorTileX = () => this.cursorX() + this.scrollX;
+        this.cursorTileY = () => this.cursorY() + this.scrollY;
 
         canvas.addEventListener("mousedown", (e) => this.activeTool().mouseDown(e));
-        canvas.addEventListener("mouseup", (e) => this.activeTool().mouseUp(e));
+        canvas.addEventListener("mouseup", (e) => {
+            this.activeTool().mouseUp(e)
+            this.saveLevelToLocalStorage('test', this.activeLevel);
+        });
         canvas.addEventListener("mousemove", (e) => this.activeTool().mouseMove(e));
+
+        document.addEventListener('KeyW', () => this.scrollY--);
+        document.addEventListener('KeyA', () => this.scrollX--);
+        document.addEventListener('KeyS', () => this.scrollY++);
+        document.addEventListener('KeyD', () => this.scrollX++);
     }
 
 
@@ -20,7 +34,13 @@ class Editor {
             this.activeLevel = new Level();
             scrollX = 0;
             scrollY = 0;
+
+            this.saveLevelToLocalStorage('test', this.activeLevel);
         }
+    }
+
+    setActiveLevel(level) {
+        this.activeLevel = level;
     }
 
     /**
@@ -29,7 +49,7 @@ class Editor {
      */
     async setActiveLevelFromFile(inputFile) {
         var levelData = await this.getLevelDataFromFile(inputFile);
-        this.activeLevel = new Level(levelData);
+        this.setActiveLevel(new Level(levelData));
     }
 
     /**
@@ -58,6 +78,33 @@ class Editor {
         dlAnchorElem.setAttribute("href", dataStr);
         dlAnchorElem.setAttribute("download", "level.json");
         dlAnchorElem.click();
+    }
+
+    saveLevelToLocalStorage(name, level) {
+        localStorage.setItem(`rollerEditor_${name}`, JSON.stringify(level));
+    }
+
+    loadLevelFromLocalStorage(name) {
+var level = new Level();
+      
+            var data = JSON.parse(localStorage.getItem(`rollerEditor_${name}`));
+        //   console.log(data.tiles);
+            level.name = data.name;
+            data.tiles.forEach(tile => level.tiles.push(new Tile(tile.typeId, tile.type, tile.x, tile.y)));
+            this.setActiveLevel(level);
+
+
+        return level;
+    }
+
+    draw() {
+
+        this.activeTool().draw();
+        Renderer.saveState();
+        Renderer.ctx.translate(tilesToPx(-this.scrollX), tilesToPx(-this.scrollY));
+
+        this.activeLevel.draw();
+        Renderer.restoreState();
     }
 };
 

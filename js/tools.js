@@ -1,48 +1,27 @@
-class Tile{
-    constructor(x, y, sprite){
-        this.x = x;
-        this.y = y;
-        this.sprite = sprite;
-    }
-}
-
-class Block extends Tile{
-    constructor(x, y){
-        super(x, y, sprites.tiles.block);
-    }
-}
-
-
-class Tool{
-    constructor(eventActions = {}){
+class Tool {
+    constructor(eventActions = {}) {
         this.eventActions = eventActions
     }
 
-    readEvent(event){
+    readEvent(event) {
         this.eventActions[event]();
     }
 }
 const tools = {
-    TilePlacer: new class TilePlacer extends Tool{
+    TilePlacer: new class TilePlacer extends Tool {
         constructor() {
             super({
                 mouseDown: () => this.setMouseDown(e)
             });
             this.mouseIsDown = false;
             this.mouseButton = undefined;
-            this.toolbar = [
-
-            ]
-        }
-
-        setMouseDown(){
-            console.log(e);
         }
 
         mouseDown(e) {
             this.mouseIsDown = true;
             this.mouseButton = e.button;
-            (this.mouseButton == 0) ? addTile() : removeTile();
+            if (this.mouseButton == 0) addTile(Editor.cursorTileX(), Editor.cursorTileY())
+            else removeTile(Editor.cursorTileX(), Editor.cursorTileY());
         }
 
         mouseUp() {
@@ -51,27 +30,23 @@ const tools = {
 
         mouseMove() {
             if (this.mouseIsDown) {
-                (this.mouseButton == 0) ? addTile() : removeTile();
+                if (this.mouseButton == 0) addTile(Editor.cursorTileX(), Editor.cursorTileY())
+                else removeTile(Editor.cursorTileX(), Editor.cursorTileY());
             }
         }
 
-        
+        draw(){
+            Renderer.img(sprites.tiles[tileSelect.value], tilesToPx(Editor.cursorX()), tilesToPx(Editor.cursorY()));
+        }
     }
 }
 
-addTile = () => {
-    var onTile = Editor.activeLevel.tiles.filter((tile) => (tile.x == Editor.cursorX() + scrollX && tile.y == Editor.cursorY() + scrollY));
-    if (onTile.length == 0) {
-
-        Editor.activeLevel.tiles.push({
-            type: tileSelect.value,
-            x: Editor.cursorX() + scrollX,
-            y: Editor.cursorY() + scrollY
-        });
-    }
+addTile = (x, y) => {
+    var onTile = Editor.activeLevel.tiles.filter((tile) => (tile.x == x && tile.y == y));
+    if (onTile.length == 0) Editor.activeLevel.tiles.push(new Block(x, y));
 }
 
-removeTile = () => {
-    var tileIndex = Editor.activeLevel.tiles.findIndex((tile) => (tile.x == Editor.cursorX() + scrollX && tile.y == Editor.cursorY() + scrollY));
-if(tileIndex >= 0)   Editor.activeLevel.tiles.splice(tileIndex, 1);
+removeTile = (x, y) => {
+    var tileIndex = Editor.activeLevel.tiles.findIndex((tile) => (tile.x == x && tile.y == y));
+    if (tileIndex >= 0) Editor.activeLevel.tiles.splice(tileIndex, 1);
 }

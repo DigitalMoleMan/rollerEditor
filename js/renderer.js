@@ -1,10 +1,10 @@
-class Renderer {
-    constructor(canvas, ctx) {
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-
+Renderer = new class Renderer{
+    constructor() {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.zoom = 1;
 
 
         this.scrollX = 0;
@@ -14,6 +14,14 @@ class Renderer {
     clear() {
         this.ctx.fillStyle = "#000";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    saveState(){
+        this.ctx.save();
+    }
+
+    restoreState(){
+        this.ctx.restore();
     }
 
     /**
